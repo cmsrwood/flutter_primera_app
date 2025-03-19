@@ -33,12 +33,36 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController num1 = TextEditingController();
   final TextEditingController num2 = TextEditingController();
-  int _suma = 0;
+  double _resultado = 0;
   void _sumar() {
     final int num1 = int.parse(this.num1.text);
     final int num2 = int.parse(this.num2.text);
     setState(() {
-      _suma = num1 + num2;
+      _resultado = (num1 + num2).toDouble();
+    });
+  }
+
+  void _restar() {
+    final int num1 = int.parse(this.num1.text);
+    final int num2 = int.parse(this.num2.text);
+    setState(() {
+      _resultado = (num1 - num2).toDouble();
+    });
+  }
+
+  void _multiplicar() {
+    final int num1 = int.parse(this.num1.text);
+    final int num2 = int.parse(this.num2.text);
+    setState(() {
+      _resultado = (num1 * num2).toDouble();
+    });
+  }
+
+  void _dividir() {
+    final int num1 = int.parse(this.num1.text);
+    final int num2 = int.parse(this.num2.text);
+    setState(() {
+      _resultado = num1 / num2;
     });
   }
 
@@ -53,27 +77,50 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('$_suma', style: Theme.of(context).textTheme.headlineMedium),
-            const SizedBox(height: 20),
-            TextField(
-              controller: num1,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Ingresa un número',
-                border: OutlineInputBorder(),
-                
-              ),
-            ),
-            TextField(
-              controller: num2,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Ingresa un número',
-                border: OutlineInputBorder(),
-              ),
+            Text(
+              '$_resultado',
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(onPressed: _sumar, child: const Text('Sumar')),
+            Container(
+              width: 250,
+              child: Column(
+                children: [
+                  TextField(
+                    controller: num1,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Ingresa un número',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TextField(
+                    controller: num2,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Ingresa un número',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Column(
+              children: [
+                ElevatedButton(onPressed: _sumar, child: const Text('Sumar')),
+                ElevatedButton(onPressed: _restar, child: const Text('Restar')),
+                ElevatedButton(
+                  onPressed: _multiplicar,
+                  child: const Text('Multiplicar'),
+                ),
+                ElevatedButton(
+                  onPressed: _dividir,
+                  child: const Text('Dividir'),
+                ),
+              ],
+            ),
           ],
         ),
       ),
